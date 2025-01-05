@@ -26,5 +26,25 @@ namespace GerenciamentoDePessoas.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [Route("UsuarioUrl")]
+        public IActionResult UsuarioUrl(string nome, string sobrenome)
+        {
+            return View("UsuarioUrl",$"{nome} {sobrenome}");
+        }
+
+        [HttpGet]
+        [Route("CriarUsuario")]
+        public IActionResult CriarUsuario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("CriarUsuario")]
+        public IActionResult CriarUsuario(string nome, string sobrenome)
+        {
+            return View("UsuarioUrl",$"{nome} {sobrenome}");
+        }
     }
 }
