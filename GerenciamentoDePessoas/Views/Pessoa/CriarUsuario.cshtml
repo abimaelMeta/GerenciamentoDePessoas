@@ -1,0 +1,12 @@
+﻿@model Pessoa
+
+<h1>Criar Usuario</h1>
+
+<form asp-action="CriarUsuario" asp-controller="Pessoa" method="post">
+    <label>Nome:</label>
+    <input type="text" asp-for="Nome"/>
+    <label>Sobrenome:</label>
+    <input type="text" asp-for="Sobrenome"/>
+    <br />
+    <button type="submit">Cadastrar</button>
+</form>

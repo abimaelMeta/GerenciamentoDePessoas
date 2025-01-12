@@ -1,7 +1,8 @@
 ﻿@model List<Pessoa>
 
 <h1>Detalhes dos usuários</h1>
-<h2>@ViewData["TextoTelaDetalhes"] </h2>
+<h2>@ViewData["TextoDescricao"]</h2>
+
 @foreach (var pessoa in Model)
 {
     <p>Id: @pessoa.Id</p>
@@ -16,6 +17,6 @@
     }
 }
 
-
-<p>@ViewData["DataAtual"]</p>
-
+<p>
+    @ViewData["DataAtual"]
+</p>

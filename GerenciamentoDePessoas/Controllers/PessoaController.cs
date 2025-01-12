@@ -9,21 +9,52 @@ namespace GerenciamentoDePessoas.Controllers
         [Route("Inicio")]
         public IActionResult Index()
         {
-            ViewBag.Mensagem = TempData["TextoParaAIndex"];
+            ViewBag.Cadastro = TempData["SucessoCriacao"];
             return View();
         }
         
         [Route("Detalhes/{id:int}")]
         public IActionResult DetalhesUsuario(int id)
         {
-            //ViewBag.TextoTelaDetalhes = "Texto para a tela de detalhes.";
-            //ViewBag.DataAtual = DateTime.Now;
+            ViewData["TextoDescricao"] = "Texto da tela de descrição.";
+            ViewData["DataAtual"] = DateTime.Now;
 
-            //ViewData["TextoTelaDetalhes"] = "Texto para a tela de detalhes.";
-            //ViewData["DataAtual"] = DateTime.Now;
+            TempData["SucessoRedirecionamento"] = "O redirecionamento fui um sucesso!";
 
-            TempData["TextoParaAIndex"] = "Texto que vai aparecer na Index de Pessoa.";
 
+            var listaUsuario = new List<Pessoa>();
+            listaUsuario.Add( new Pessoa(1,"Pedro", "Silva", DateTime.Now));
+            listaUsuario.Add( new Pessoa(2,"Maria", "Silva", DateTime.Now));
+            listaUsuario.Add( new Pessoa(3,"Rosa", "Mendes", DateTime.Now));
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Route("BuscaPorUrl")]
+        public IActionResult BuscaPorUrl(string nome, string sobrenome)
+        {
+            var listaUsuario = new List<Pessoa>();
+            listaUsuario.Add(new Pessoa(1, "Pedro", "Silva", DateTime.Now));
+            listaUsuario.Add(new Pessoa(2, "Maria", "Silva", DateTime.Now));
+            listaUsuario.Add(new Pessoa(3, "Rosa", "Mendes", DateTime.Now));
+
+            Pessoa pessoaSelecionada = listaUsuario.FirstOrDefault(n => n.Nome == nome && n.Sobrenome == sobrenome);
+
+            return View(pessoaSelecionada);
+        }
+
+        [HttpGet]
+        [Route("CriarUsuario")]
+        public IActionResult CriarUsuario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("CriarUsuario")]
+        public IActionResult CriarUsuario(Pessoa pessoa)
+        {
+            TempData["SucessoCriacao"] = $"O usuário {pessoa.Nome} {pessoa.Sobrenome} foi criado!";
             return RedirectToAction("Index");
         }
     }
