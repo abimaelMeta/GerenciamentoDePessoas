@@ -12,7 +12,7 @@ namespace GerenciamentoDePessoas.Controllers
             ViewBag.Cadastro = TempData["SucessoCriacao"];
             return View();
         }
-        
+
         [Route("Detalhes/{id:int}")]
         public IActionResult DetalhesUsuario(int id)
         {
@@ -23,9 +23,9 @@ namespace GerenciamentoDePessoas.Controllers
 
 
             var listaUsuario = new List<Pessoa>();
-            listaUsuario.Add( new Pessoa(1,"Pedro", "Silva", DateTime.Now));
-            listaUsuario.Add( new Pessoa(2,"Maria", "Silva", DateTime.Now));
-            listaUsuario.Add( new Pessoa(3,"Rosa", "Mendes", DateTime.Now));
+            listaUsuario.Add(new Pessoa(1, "Pedro", "Silva", DateTime.Now));
+            listaUsuario.Add(new Pessoa(2, "Maria", "Silva", DateTime.Now));
+            listaUsuario.Add(new Pessoa(3, "Rosa", "Mendes", DateTime.Now));
             return RedirectToAction("Index");
         }
 
@@ -54,8 +54,13 @@ namespace GerenciamentoDePessoas.Controllers
         [Route("CriarUsuario")]
         public IActionResult CriarUsuario(Pessoa pessoa)
         {
-            TempData["SucessoCriacao"] = $"O usuário {pessoa.Nome} {pessoa.Sobrenome} foi criado!";
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                TempData["SucessoCriacao"] = $"O usuário {pessoa.Nome} {pessoa.Sobrenome} foi criado!";
+                return RedirectToAction("Index");
+            }
+
+            return View(pessoa);
         }
     }
 }
