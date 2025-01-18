@@ -34,6 +34,7 @@ namespace GerenciamentoDePessoas.Models
         {
             if (dataNascimento > DateTime.Now)
             {
+
                 return new ValidationResult("A data de nascimento não pode ser futura.");
             }
 
