@@ -22,7 +22,7 @@ namespace GerenciamentoDePessoas.Controllers
         // GET: Pessoas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pessoa.ToListAsync());
+            return View(await _context.Pessoas.ToListAsync());
         }
 
         // GET: Pessoas/Details/5
@@ -33,7 +33,7 @@ namespace GerenciamentoDePessoas.Controllers
                 return NotFound();
             }
 
-            var pessoa = await _context.Pessoa
+            var pessoa = await _context.Pessoas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pessoa == null)
             {
@@ -73,7 +73,7 @@ namespace GerenciamentoDePessoas.Controllers
                 return NotFound();
             }
 
-            var pessoa = await _context.Pessoa.FindAsync(id);
+            var pessoa = await _context.Pessoas.FindAsync(id);
             if (pessoa == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace GerenciamentoDePessoas.Controllers
                 return NotFound();
             }
 
-            var pessoa = await _context.Pessoa
+            var pessoa = await _context.Pessoas
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pessoa == null)
             {
@@ -139,10 +139,10 @@ namespace GerenciamentoDePessoas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pessoa = await _context.Pessoa.FindAsync(id);
+            var pessoa = await _context.Pessoas.FindAsync(id);
             if (pessoa != null)
             {
-                _context.Pessoa.Remove(pessoa);
+                _context.Pessoas.Remove(pessoa);
             }
 
             await _context.SaveChangesAsync();
@@ -151,7 +151,7 @@ namespace GerenciamentoDePessoas.Controllers
 
         private bool PessoaExists(int id)
         {
-            return _context.Pessoa.Any(e => e.Id == id);
+            return _context.Pessoas.Any(e => e.Id == id);
         }
     }
 }

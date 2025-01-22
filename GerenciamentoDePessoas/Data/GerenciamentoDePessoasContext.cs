@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using GerenciamentoDePessoas.Models;
 
 namespace GerenciamentoDePessoas.Data
@@ -14,6 +10,6 @@ namespace GerenciamentoDePessoas.Data
         {
         }
 
-        public DbSet<GerenciamentoDePessoas.Models.Pessoa> Pessoa { get; set; } = default!;
+        public DbSet<Pessoa> Pessoas { get; set; } = default!;
     }
 }

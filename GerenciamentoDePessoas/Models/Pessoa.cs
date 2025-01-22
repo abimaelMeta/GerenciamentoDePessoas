@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GerenciamentoDePessoas.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace GerenciamentoDePessoas.Models
 {
@@ -29,6 +30,13 @@ namespace GerenciamentoDePessoas.Models
         [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
         [CustomValidation(typeof(Pessoa), "ValidarDataNascimento")]
         public DateTime DataNascimento { get; set; }
+
+        [Required(ErrorMessage = "O CPF é obrigatório!")]
+        [StringLength(11, MinimumLength = 11, ErrorMessage = "O CPF deve conter 11 digitos sem caracters especiais.")]
+        public string CPF { get; set; }
+
+        [Range(1, 8, ErrorMessage = "Selecione um tipo sanguíneo válido.")]
+        public ETipoSanguineo TipoSanguineo { get; set; }
 
         public static ValidationResult ValidarDataNascimento(DateTime dataNascimento)
         {
