@@ -1,8 +1,13 @@
 ﻿@model List<Pessoa>
+
+@{
+    ViewData["Title"] = "Pessoas";
+}
+
 <head>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
 </head>
-<h1>Listagem de Usuários</h1>
+<h1>Listagem de Pessoas</h1>
 
 @if (TempData["Sucesso"] != null)
 {
