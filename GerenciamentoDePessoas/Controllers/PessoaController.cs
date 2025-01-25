@@ -25,16 +25,95 @@ namespace GerenciamentoDePessoas.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<ActionResult> Criar(Pessoa pessoa)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                // Retorne a view com mensagens de erro
+                if (ModelState.IsValid)
+                {
+                    var usuario = await _pessoasService.Criar(pessoa);
+
+                    TempData["Sucesso"] = $"Usuário {pessoa.Nome} criado com sucesso!";
+                    return RedirectToAction("Index", "Pessoa");
+                }
+
                 return View(pessoa);
             }
-            return View(pessoa);
+            catch (Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+                return View(pessoa);
+            }
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Editar(int id)
+        {
+            try
+            {
+                if(id == 0)
+                {
+                    throw new Exception("Um Id deve ser informado.");
+                }
+
+                var pessoaDb = await _pessoasService.BuscarPorId(id);
+
+                return View(pessoaDb);
+            }
+            catch (Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+                return RedirectToAction("Index", "Pessoa");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Editar(Pessoa pessoa)
+        {
+            try
+            {
+                if (pessoa.Id == 0)
+                {
+                    throw new Exception("Um Id deve ser informado.");
+                }
+
+                var pessoaDb = await _pessoasService.Editar(pessoa);
+
+                TempData["Sucesso"] = $"Pessoa {pessoa.Nome} foi atualizada com sucesso.";
+
+                return RedirectToAction("Index", "Pessoa");
+            }
+            catch (Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+                return View(pessoa);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Apagar(int id)
+        {
+            try
+            {
+                if (id == 0)
+                {
+                    throw new Exception("Um Id deve ser informado.");
+                }
+
+                await _pessoasService.Apagar(id);
+
+                TempData["Sucesso"] = $"Pessoa deletada!";
+
+                return RedirectToAction("Index", "Pessoa");
+            }
+            catch (Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+                return RedirectToAction("Index", "Pessoa");
+            }
         }
     }
 }

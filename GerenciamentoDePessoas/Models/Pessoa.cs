@@ -35,7 +35,7 @@ namespace GerenciamentoDePessoas.Models
         [StringLength(11, MinimumLength = 11, ErrorMessage = "O CPF deve conter 11 digitos sem caracters especiais.")]
         public string CPF { get; set; }
 
-        [Range(1, 8, ErrorMessage = "Selecione um tipo sanguíneo válido.")]
+        [Required(ErrorMessage = "O CPF é obrigatório!")]
         public ETipoSanguineo TipoSanguineo { get; set; }
 
         public static ValidationResult ValidarDataNascimento(DateTime dataNascimento)
