@@ -16,7 +16,7 @@ namespace GerenciamentoDePessoas.Services
         {
             var pessoaDb = await _pessoasRepository.BuscarPorId(id);
 
-            await _pessoasRepository.Apagar(pessoaDb)
+            await _pessoasRepository.Apagar(pessoaDb);
         }
 
         public async Task<Pessoa> BuscarPorId(int id)
