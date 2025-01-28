@@ -18,6 +18,14 @@ namespace GerenciamentoDePessoas
             builder.Services.AddScoped<IPessoaService, PessoaService>();
             builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("PermitirTudo",
+                    policy => policy.AllowAnyOrigin()
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader());
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -38,6 +46,8 @@ namespace GerenciamentoDePessoas
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.UseCors("PermitirTudo");
+
 
             app.Run();
         }
