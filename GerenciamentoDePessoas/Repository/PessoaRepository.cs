@@ -48,6 +48,11 @@ namespace GerenciamentoDePessoas.Repository
             return usuariosBanco;
         }
 
+        public async Task<int> BuscarTotal()
+        {
+            return await _context.Pessoas.CountAsync();
+        }
+
         public async Task<Pessoa> Criar(Pessoa pessoa)
         {
             var pessoas = new List<Pessoa>

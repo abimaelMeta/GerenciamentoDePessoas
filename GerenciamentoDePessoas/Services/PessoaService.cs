@@ -31,6 +31,11 @@ namespace GerenciamentoDePessoas.Services
             return usuariosBanco;
         }
 
+        public async Task<int> BuscarTotal()
+        {
+            return await _pessoasRepository.BuscarTotal();
+        }
+
         public async Task<Pessoa> Criar(Pessoa pessoa)
         {
             var usuarioExiste = await _pessoasRepository.VerificarSePessoaExiste(pessoa.CPF);

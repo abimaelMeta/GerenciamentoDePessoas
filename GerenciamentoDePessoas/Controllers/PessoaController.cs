@@ -21,6 +21,13 @@ namespace GerenciamentoDePessoas.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> Total()
+        {
+            var totalPessoas = await _pessoasService.BuscarTotal();
+            return Ok(totalPessoas);
+        }
+
+        [HttpGet]
         public async Task<ActionResult> Criar()
         {
             return View();
