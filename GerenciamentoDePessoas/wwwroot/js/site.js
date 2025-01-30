@@ -22,3 +22,31 @@ $(document).ready(function () {
         });
     });
 });
+
+
+$('#botaoBusca').click(function () {
+    var termo = $('#termoBusca').val();
+    if (!termo) {
+        alert('Informe um termo para busca.');
+        return;
+    }
+
+    $.ajax({
+        url: '/Pessoa/BuscarPessoasNome',
+        type: 'GET',
+        data: { termo: termo },
+        success: function (data) {
+            $('#resultadoPessoa').empty();
+            if (data.length === 0) {
+                $('#resultadoPessoa').append('<li class="list-group-item">Nenhuma pessoa encontrada.</li>');
+            } else {
+                data.forEach(function (pessoa) {
+                    $('#resultadoPessoa').append('<li class="list-group-item">' + pessoa + '</li>');
+                });
+            }
+        },
+        error: function () {
+            alert('Erro ao buscar pessoas.');
+        }
+    });
+});                

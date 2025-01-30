@@ -20,6 +20,18 @@ namespace GerenciamentoDePessoas.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Pessoa>> BuscarPessoasNome(string termo)
+        {
+            var pessoasDb = await _context.Pessoas
+            .Where(p => EF.Functions.Like(p.Nome, $"%{termo}%") ||
+                        EF.Functions.Like(p.Sobrenome, $"%{termo}%") ||
+                        EF.Functions.Like(p.CPF, $"%{termo}%"))
+            .ToListAsync();
+
+            return pessoasDb;
+
+        }
+
         public async Task<Pessoa> BuscarPorId(int id)
         {
             try
