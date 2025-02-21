@@ -1,7 +1,8 @@
 ﻿@model List<Pessoa>
 <head>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css">
 </head>
+
 <h1>Listagem de Pessoas</h1>
 
 @if (TempData["Sucesso"] != null)
@@ -84,7 +85,7 @@
                         </div>
                         <div class="modal-body">
                             <h3 class="text-center">Deseja apagar a pessoa @item.Nome @item.Sobrenome?</h3>
-                            <span class="text-danger">A ação não pode ser desfeita após a confirmação!</span>                           
+                            <span class="text-danger">A ação não pode ser desfeita após a confirmação!</span>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -97,6 +98,7 @@
 
     </tbody>
 </table>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
