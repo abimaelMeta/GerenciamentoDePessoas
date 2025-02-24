@@ -1,5 +1,15 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿jQuery.noConflict();
+(function ($) {
+    $(document).ready(function () {
+        $('.tabela-pessoas').DataTable(
+            {
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.2.1/i18n/pt-BR.json',
+                }
+            }
+        );
+    });
+})(jQuery);
 
 // Write your JavaScript code.
 
